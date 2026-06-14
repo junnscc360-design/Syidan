@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voucher - TriHub</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg-base:#0c0d10;
+--bg-surface:#14151a;
+--bg-card:#1c1d24;
+--border-color:#2a2c35;
+--text-primary:#f1f1f1;
+--text-secondary:#8b92a5;
+--accent:#ffcc00;
+--accent-hover:#e6b800;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans', sans-serif;
+text-decoration:none;
+}
+
+body{
+background:var(--bg-base);
+color:var(--text-primary);
+overflow-x:hidden;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(12,13,16,.92);
+backdrop-filter:blur(8px);
+border-bottom:1px solid var(--border-color);
+padding:10px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo-wrapper{
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.brand-logo{
+height:85px;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+color:white;
+}
+
+.logo span{
+color:var(--accent);
+}
+
+.nav-links{
+display:flex;
+gap:32px;
+}
+
+.nav-links a{
+color:var(--text-secondary);
+font-size:14px;
+font-weight:700;
+}
+
+.btn-cs{
+background:var(--accent);
+color:#111;
+padding:10px 22px;
+border-radius:8px;
+font-weight:800;
+}
+
+.container{
+max-width:1450px;
+margin:40px auto;
+padding:0 5%;
+display:flex;
+gap:30px;
+align-items:flex-start;
+}
+
+.left-col{
+flex:1.1;
+background:var(--bg-surface);
+border:1px solid var(--border-color);
+border-radius:16px;
+overflow:hidden;
+position:sticky;
+top:95px;
+}
+
+.voucher-banner{
+width:100%;
+height:360px;
+object-fit:contain;
+background:#111;
+padding:15px;
+}
+
+.voucher-info{
+padding:24px;
+}
+
+.voucher-info h1{
+font-size:30px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.voucher-info p{
+font-size:14px;
+line-height:1.9;
+color:var(--text-secondary);
+}
+
+.right-col{
+flex:2;
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.form-section{
+background:var(--bg-surface);
+border:1px solid var(--border-color);
+border-radius:16px;
+padding:24px;
+}
+
+.section-title{
+font-size:20px;
+font-weight:800;
+margin-bottom:20px;
+}
+
+.input-box{
+margin-bottom:18px;
+}
+
+.input-box label{
+display:block;
+margin-bottom:8px;
+font-size:14px;
+font-weight:700;
+color:var(--text-secondary);
+}
+
+.input-box input{
+width:100%;
+padding:15px;
+background:var(--bg-card);
+border:1px solid var(--border-color);
+border-radius:10px;
+color:white;
+font-size:14px;
+outline:none;
+}
+
+.input-box input:focus{
+border-color:var(--accent);
+box-shadow:0 0 0 3px rgba(255,204,0,.15);
+}
+
+/* NOMINAL */
+.nominal-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill, minmax(190px,1fr));
+gap:15px;
+}
+
+.nominal-card input{
+display:none;
+}
+
+.nominal-box{
+background:var(--bg-card);
+border:2px solid var(--border-color);
+border-radius:14px;
+padding:18px;
+text-align:center;
+cursor:pointer;
+transition:.25s;
+}
+
+.nominal-box:hover{
+border-color:var(--accent);
+box-shadow:0 0 10px rgba(255,204,0,.15), 0 0 20px rgba(255,204,0,.08);
+transform:translateY(-3px);
+}
+
+.nominal-box h4{
+font-size:15px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.nominal-box p{
+font-size:18px;
+font-weight:800;
+color:var(--accent);
+}
+
+.nominal-card input:checked + .nominal-box{
+border-color:var(--accent);
+background:rgba(255,204,0,.08);
+box-shadow:0 0 14px rgba(255,204,0,.18);
+}
+
+/* PAYMENT */
+.payment-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+gap:14px;
+}
+
+.payment-card input{
+display:none;
+}
+
+.payment-box{
+display:flex;
+align-items:center;
+gap:14px;
+padding:15px;
+background:var(--bg-card);
+border:2px solid var(--border-color);
+border-radius:14px;
+cursor:pointer;
+transition:.25s;
+}
+
+.payment-box:hover{
+border-color:var(--accent);
+box-shadow:0 0 10px rgba(255,204,0,.15), 0 0 20px rgba(255,204,0,.08);
+}
+
+.payment-box img{
+height:28px;
+object-fit:contain;
+}
+
+.payment-card input:checked + .payment-box{
+border-color:var(--accent);
+background:rgba(255,204,0,.08);
+}
+
+.btn-submit{
+width:100%;
+padding:18px;
+border:none;
+border-radius:12px;
+background:var(--accent);
+color:#111;
+font-size:16px;
+font-weight:800;
+cursor:pointer;
+transition:.25s;
+}
+
+.btn-submit:hover{
+background:var(--accent-hover);
+transform:translateY(-2px);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.container{
+flex-direction:column;
+}
+.left-col{
+position:static;
+}
+.voucher-banner{
+height:250px;
+}
+.brand-logo{
+height:55px;
+}
+.nav-links{
+display:none;
+}
+.nominal-grid{
+grid-template-columns:repeat(2, 1fr); /* Diubah ke 2 kolom biar lebih rapi di HP */
+}
+.payment-grid{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="logo-wrapper">
+<img src="images/logo-trihub.png" alt="TriHub" class="brand-logo" onerror="this.style.display='none'">
+<div class="logo">TriHub<span>.</span></div>
+</a>
+
+<nav class="nav-links">
+<a href="index.html">Beranda</a>
+<a href="index.html#games">Games</a>
+<a href="index.html#voucher">Voucher</a>
+</nav>
+
+<a href="cs_template.html" class="btn-cs">Customer Service</a>
+</header>
+
+<div class="container">
+
+    <div class="left-col">
+        <img src="" alt="Voucher Banner" class="voucher-banner" id="voucher-banner">
+        <div class="voucher-info">
+            <h1 id="voucher-nama">Memuat...</h1>
+            <p id="voucher-deskripsi"></p>
+            <br>
+            <h3>Cara Redeem</h3>
+            <p>
+                1. Pilih nominal voucher.<br>
+                2. Masukkan email akun.<br>
+                3. Pilih metode pembayaran.<br>
+                4. Selesaikan transaksi.<br>
+                5. Kode voucher dikirim otomatis.
+            </p>
+        </div>
+    </div>
+
+    <form class="right-col" method="POST" action="#">
+
+        <div class="form-section">
+            <h2 class="section-title">1. Data Penerima</h2>
+            <div class="input-box">
+                <label>Email / Username Akun</label>
+                <input type="text" name="akun" placeholder="Masukkan Email atau Username" required>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">2. Pilih Nominal Voucher</h2>
+            <div class="nominal-grid" id="nominal-container">
+                </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">3. Metode Pembayaran</h2>
+            <div class="payment-grid">
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="qris" required>
+                    <div class="payment-box">
+                        <img src="images/pay-qris.png" alt="QRIS" onerror="this.style.display='none'">
+                        <span>QRIS</span>
+                    </div>
+                </label>
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="dana">
+                    <div class="payment-box">
+                        <img src="images/pay-dana.png" alt="DANA" onerror="this.style.display='none'">
+                        <span>DANA</span>
+                    </div>
+                </label>
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="gopay">
+                    <div class="payment-box">
+                        <img src="images/pay-gopay.png" alt="GoPay" onerror="this.style.display='none'">
+                        <span>GoPay</span>
+                    </div>
+                </label>
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="ovo">
+                    <div class="payment-box">
+                        <img src="images/pay-ovo.png" alt="OVO" onerror="this.style.display='none'">
+                        <span>OVO</span>
+                    </div>
+                </label>
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="bca">
+                    <div class="payment-box">
+                        <img src="images/pay-bca.png" alt="BCA" onerror="this.style.display='none'">
+                        <span>BCA Virtual Account</span>
+                    </div>
+                </label>
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="mandiri">
+                    <div class="payment-box">
+                        <img src="images/pay-mandiri.png" alt="Mandiri" onerror="this.style.display='none'">
+                        <span>Mandiri VA</span>
+                    </div>
+                </label>
+
+                <label class="payment-card">
+                    <input type="radio" name="payment" value="visa">
+                    <div class="payment-box">
+                        <img src="images/pay-visa.png" alt="Visa" onerror="this.style.display='none'">
+                        <span>Visa / Mastercard</span>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">4. Pengiriman Kode Voucher</h2>
+            <div class="input-box">
+                <label>Nomor WhatsApp</label>
+                <input type="number" name="whatsapp" placeholder="081234567890" required>
+            </div>
+
+            <div class="input-box">
+                <label>Catatan Tambahan (Opsional)</label>
+                <input type="text" name="catatan" placeholder="Contoh: Kirim secepatnya">
+            </div>
+
+            <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-secondary); margin-bottom:20px; cursor:pointer;">
+                <input type="checkbox" checked>
+                Kirim kode voucher dan invoice ke WhatsApp saya
+            </label>
+
+            <button type="submit" class="btn-submit">Beli Sekarang</button>
+        </div>
+
+    </form>
+</div>
+
+<footer style="margin-top:40px; padding:30px; text-align:center; border-top:1px solid #2a2c35; color:#8b92a5; font-size:14px;">
+    © 2026 TriHub. All Rights Reserved.
+</footer>
+
+<script>
+    // Database Mini EVoucher
+    const daftar_voucher = {
+        'steam': {
+            'nama': 'Steam Wallet',
+            'deskripsi': 'Top up Steam Wallet global untuk membeli game, DLC, skin, item, dan berbagai kebutuhan akun Steam.',
+            'banner': 'images/wallet-steam.jpg',
+            'items': [
+                {'nama': 'Steam Rp 12.000', 'harga': 'Rp 13.000'},
+                {'nama': 'Steam Rp 45.000', 'harga': 'Rp 46.000'},
+                {'nama': 'Steam Rp 60.000', 'harga': 'Rp 61.000'},
+                {'nama': 'Steam Rp 90.000', 'harga': 'Rp 91.000'},
+                {'nama': 'Steam Rp 120.000', 'harga': 'Rp 121.000'},
+                {'nama': 'Steam Rp 250.000', 'harga': 'Rp 251.000'},
+                {'nama': 'Steam Rp 500.000', 'harga': 'Rp 501.000'}
+            ]
+        },
+        'discord': {
+            'nama': 'Discord Nitro',
+            'deskripsi': 'Top up Discord Nitro Basic & Premium untuk mendapatkan emoji, boost server, dan fitur eksklusif.',
+            'banner': 'images/wallet-discord.jpg',
+            'items': [
+                {'nama': 'Nitro Basic 1 Bulan', 'harga': 'Rp 35.000'},
+                {'nama': 'Nitro Premium 1 Bulan', 'harga': 'Rp 99.000'},
+                {'nama': 'Nitro Premium 3 Bulan', 'harga': 'Rp 289.000'},
+                {'nama': 'Nitro Premium 12 Bulan', 'harga': 'Rp 949.000'}
+            ]
+        },
+        'psn': {
+            'nama': 'PSN Card',
+            'deskripsi': 'Voucher PlayStation Network untuk top up wallet PS Store dan PS Plus.',
+            'banner': 'images/wallet-psn.jpg',
+            'items': [
+                {'nama': 'PSN $10', 'harga': 'Rp 165.000'},
+                {'nama': 'PSN $20', 'harga': 'Rp 325.000'},
+                {'nama': 'PSN $50', 'harga': 'Rp 795.000'},
+                {'nama': 'PS Plus Essential', 'harga': 'Rp 139.000'}
+            ]
+        },
+        'xbox': {
+            'nama': 'Xbox Gift Card',
+            'deskripsi': 'Top up Xbox Wallet dan pembelian Game Pass, game, maupun item Microsoft Store.',
+            'banner': 'images/wallet-xbox.jpg',
+            'items': [
+                {'nama': 'Xbox $10', 'harga': 'Rp 165.000'},
+                {'nama': 'Xbox $20', 'harga': 'Rp 325.000'},
+                {'nama': 'Xbox $50', 'harga': 'Rp 799.000'},
+                {'nama': 'Xbox Game Pass', 'harga': 'Rp 79.000'}
+            ]
+        },
+        'nintendo': {
+            'nama': 'Nintendo eShop',
+            'deskripsi': 'Voucher Nintendo eShop Region US & Japan untuk membeli game Nintendo Switch.',
+            'banner': 'images/wallet-nintendo.jpg',
+            'items': [
+                {'nama': 'Nintendo $10', 'harga': 'Rp 165.000'},
+                {'nama': 'Nintendo $20', 'harga': 'Rp 325.000'},
+                {'nama': 'Nintendo $50', 'harga': 'Rp 799.000'}
+            ]
+        }
+    };
+
+    // Ambil jenis voucher dari URL (?voucher=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    let voucherId = urlParams.get('voucher');
+
+    // Validasi, default ke steam jika tidak ada parameter yang cocok
+    if (!voucherId || !daftar_voucher[voucherId]) {
+        voucherId = 'steam';
+    }
+
+    const voucher = daftar_voucher[voucherId];
+
+    // 1. Update Title, Info, Banner
+    document.title = `${voucher.nama} - TriHub`;
+    document.getElementById('voucher-banner').src = voucher.banner;
+    document.getElementById('voucher-banner').alt = voucher.nama;
+    document.getElementById('voucher-nama').innerText = voucher.nama;
+    document.getElementById('voucher-deskripsi').innerText = voucher.deskripsi;
+
+    // 2. Render Pilihan Nominal Voucher secara Dinamis
+    const nominalContainer = document.getElementById('nominal-container');
+    voucher.items.forEach((item, index) => {
+        nominalContainer.innerHTML += `
+            <label class="nominal-card">
+                <input type="radio" name="nominal" value="${index}" required>
+                <div class="nominal-box">
+                    <h4>${item.nama}</h4>
+                    <p>${item.harga}</p>
+                </div>
+            </label>
+        `;
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Service - TriHub.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg-base:#0c0d10;
+--bg-surface:#14151a;
+--bg-card:#1c1d24;
+--border-color:#2a2c35;
+--text-primary:#f1f1f1;
+--text-secondary:#8b92a5;
+--accent:#ffcc00;
+--accent-hover:#e6b800;
+--chat-bot-bg:#22242e;
+--chat-user-bg:rgba(255,204,0,.15);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans', sans-serif;
+text-decoration:none;
+}
+
+body{
+background:var(--bg-base);
+color:var(--text-primary);
+overflow-x:hidden;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(12,13,16,.92);
+backdrop-filter:blur(8px);
+border-bottom:1px solid var(--border-color);
+padding:10px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo-wrapper{
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.brand-logo{
+height:85px;
+width:auto;
+object-fit:contain;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+color:white;
+}
+
+.logo span{
+color:var(--accent);
+}
+
+.nav-links{
+display:flex;
+gap:32px;
+}
+
+.nav-links a{
+color:var(--text-secondary);
+font-size:14px;
+font-weight:700;
+transition:.2s;
+}
+
+.nav-links a:hover, .nav-links a.active{
+color:white;
+}
+
+.btn-cs{
+background:var(--accent);
+color:#111;
+padding:10px 22px;
+border-radius:8px;
+font-weight:800;
+}
+
+.container{
+max-width:1300px;
+margin:40px auto;
+padding:0 5%;
+display:grid;
+grid-template-columns:1.2fr 1.8fr;
+gap:35px;
+align-items:start;
+}
+
+/* LEFT SIDE: HELP CENTER & DIRECT WA */
+.info-section{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.info-card{
+background:var(--bg-surface);
+border:1px solid var(--border-color);
+border-radius:16px;
+padding:28px;
+}
+
+.info-card h1{
+font-size:28px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.info-card p{
+color:var(--text-secondary);
+font-size:14px;
+line-height:1.8;
+margin-bottom:20px;
+}
+
+.wa-direct-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+background:#25d366;
+color:white;
+padding:16px;
+border-radius:12px;
+font-weight:800;
+font-size:16px;
+transition:.25s;
+text-align:center;
+}
+
+.wa-direct-btn:hover{
+background:#20ba59;
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(37,211,102,.2);
+}
+
+/* RIGHT SIDE: LIVE CHAT SIMULATOR */
+.chat-simulator{
+background:var(--bg-surface);
+border:1px solid var(--border-color);
+border-radius:16px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+height:620px;
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.chat-header{
+background:var(--bg-card);
+border-bottom:1px solid var(--border-color);
+padding:16px 20px;
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.avatar-status{
+position:relative;
+width:44px;
+height:44px;
+}
+
+.avatar-img{
+width:100%;
+height:100%;
+border-radius:50%;
+background:var(--border-color);
+object-fit:cover;
+}
+
+.status-dot{
+position:absolute;
+bottom:2px;
+right:2px;
+width:12px;
+height:12px;
+background:#25d366;
+border:2px solid var(--bg-card);
+border-radius:50%;
+}
+
+.agent-info h3{
+font-size:16px;
+font-weight:700;
+}
+
+.agent-info p{
+font-size:12px;
+color:#25d366;
+font-weight:500;
+}
+
+/* CHAT BODY BOX */
+.chat-body{
+flex:1;
+padding:20px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+background:rgba(12,13,16,.5);
+scroll-behavior:smooth;
+}
+
+.message{
+max-width:75%;
+padding:14px 16px;
+border-radius:14px;
+font-size:14px;
+line-height:1.6;
+word-wrap:break-word;
+}
+
+.msg-bot{
+background:var(--chat-bot-bg);
+color:var(--text-primary);
+align-self:flex-start;
+border-top-left-radius:2px;
+}
+
+.msg-user{
+background:var(--chat-user-bg);
+color:white;
+align-self:flex-end;
+border-top-right-radius:2px;
+border:1px solid rgba(255,204,0,.2);
+}
+
+/* TYPING INDICATOR */
+.typing-indicator{
+display:none;
+align-self:flex-start;
+background:var(--chat-bot-bg);
+padding:12px 18px;
+border-radius:14px;
+border-top-left-radius:2px;
+}
+
+.typing-dots{
+display:flex;
+gap:5px;
+}
+
+.typing-dots span{
+width:7px;
+height:7px;
+background:var(--text-secondary);
+border-radius:50%;
+animation:blink 1.4s infinite both;
+}
+
+.typing-dots span:nth-child(2){ animation-delay: .2s; }
+.typing-dots span:nth-child(3){ animation-delay: .4s; }
+
+@keyframes blink {
+0%{ opacity: .2; }
+20%{ opacity: 1; }
+100%{ opacity: .2; }
+}
+
+/* TEMPLATE BUTTONS AREA */
+.chat-footer{
+background:var(--bg-card);
+border-top:1px solid var(--border-color);
+padding:16px;
+}
+
+.footer-hint{
+font-size:12px;
+color:var(--text-secondary);
+margin-bottom:12px;
+font-weight:600;
+text-transform:uppercase;
+letter-spacing:0.5px;
+}
+
+.template-grid{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.btn-template{
+background:var(--bg-surface);
+border:1px solid var(--border-color);
+color:var(--text-primary);
+padding:10px 16px;
+border-radius:20px;
+font-size:13px;
+font-weight:600;
+cursor:pointer;
+transition:.2s;
+text-align:left;
+}
+
+.btn-template:hover{
+border-color:var(--accent);
+background:rgba(255,204,0,.05);
+color:var(--accent);
+}
+
+/* RESPONSIVE MOBILE */
+@media(max-width:850px){
+.container{
+grid-template-columns:1fr;
+margin:20px auto;
+}
+.brand-logo{
+height:55px;
+}
+.nav-links{
+display:none;
+}
+.chat-simulator{
+height:550px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="logo-wrapper">
+<img src="images/logo-trihub.png" class="brand-logo" alt="TriHub Logo" onerror="this.style.display='none'">
+<div class="logo">TriHub<span>.</span></div>
+</a>
+
+<nav class="nav-links">
+<a href="index.html">Beranda</a>
+<a href="index.html#games">Games</a>
+<a href="joki.html">Joki</a>
+</nav>
+
+<a href="cs_template.html" class="btn-cs">Customer Service</a>
+</header>
+
+<div class="container">
+
+<div class="info-section">
+<div class="info-card">
+<h1>Pusat Bantuan</h1>
+<p>
+Mengalami kendala saat melakukan top up, pembelian voucher, ataupun pesanan joki di TriHub? 
+Jangan khawatir! Sistem asisten pintar kami siap memberikan solusi instan 24 jam.
+</p>
+<p>
+Silakan gunakan simulasi live chat di samping untuk mendapatkan jawaban dari kendala umum Anda secara cepat.
+</p>
+<hr style="border:none; border-top:1px solid var(--border-color); margin-bottom:20px;">
+<p style="font-size:12px; margin-bottom:10px;">Jika kendala belum terselesaikan via template chat, klik tombol di bawah ini:</p>
+
+<a href="https://wa.me/6281234567890?text=Halo%20Admin%20TriHub,%20saya%20mengalami%20kendala%20transaksi" target="_blank" class="wa-direct-btn">
+<svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="display:inline-block; vertical-align:middle;">
+<path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.69-4.98c-.202-.101-1.194-.588-1.379-.653-.185-.065-.32-.097-.455.101-.135.2-.524.653-.642.786-.119.135-.238.152-.44.05-.201-.102-.85-.313-1.619-.997-.598-.534-.999-1.198-1.116-1.399-.118-.2-.012-.308.089-.408.092-.091.201-.233.301-.35.1-.117.135-.198.202-.333.067-.135.034-.251-.017-.352-.052-.101-.455-1.096-.623-1.503-.164-.397-.33-.342-.455-.342-.105-.005-.226-.005-.347-.005-.121 0-.318.045-.484.225-.167.18-.637.623-.637 1.522 0 .9 1.002 1.93 1.139 2.112.136.18 1.983 3.028 4.804 4.242.671.29 1.196.463 1.603.593.675.215 1.287.185 1.77.113.539-.08 1.194-.488 1.36-.957.166-.469.166-.87.117-.954-.05-.084-.185-.133-.387-.234z"/>
+</svg>
+Hubungi WhatsApp Admin
+</a>
+</div>
+</div>
+
+<div class="chat-simulator">
+<div class="chat-header">
+<div class="avatar-status">
+<img src="images/logo-trihub.png" class="avatar-img" alt="CS Avatar" id="csAvatar">
+<div class="status-dot"></div>
+</div>
+<div class="agent-info">
+<h3>TriHub Virtual Assistant</h3>
+<p>Online • Siap Membantu</p>
+</div>
+</div>
+
+<div class="chat-body" id="chatContainer">
+<div class="message msg-bot">
+Halo! Selamat datang di Pusat Kendala TriHub. 👋<br><br>
+Ada yang bisa saya bantu? Silakan klik salah satu template pertanyaan di bawah untuk mendapatkan jawaban instan dari sistem kami!
+</div>
+
+<div class="typing-indicator" id="typingIndicator">
+<div class="typing-dots">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+</div>
+
+<div class="chat-footer">
+<div class="footer-hint">Pilih Pertanyaan:</div>
+<div class="template-grid">
+<button class="btn-template" onclick="sendReply('Top Up Belum Masuk', 'topup_delay')">❌ Top Up Belum Masuk</button>
+<button class="btn-template" onclick="sendReply('Berapa Lama Proses Top Up?', 'topup_time')">⏱️ Durasi Proses Top Up</button>
+<button class="btn-template" onclick="sendReply('Berapa Lama Proses Joki?', 'joki_time')">🎮 Durasi Pengerjaan Joki</button>
+<button class="btn-template" onclick="sendReply('Apakah Transaksi Di Sini Aman?', 'safety')">🔒 Keamanan Transaksi</button>
+<button class="btn-template" onclick="sendReply('Voucher Game Belum Diterima', 'voucher_delay')">🎫 Voucher Belum Masuk</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<footer style="text-align: center; color: var(--text-secondary); padding: 30px; margin-top: 40px; border-top: 1px solid var(--border-color); font-size:14px;">
+© 2026 TriHub. All Rights Reserved.
+</footer>
+
+<script>
+// Database Template Jawaban Otomatis
+const responses = {
+'topup_delay': 'Apabila saldo sudah terpotong namun koin/diamond belum masuk, mohon tunggu sekitar 5-15 menit karena kemungkinan antrean server API game sedang padat. Jika dalam waktu tersebut belum masuk, silakan klik tombol <b>"Hubungi WhatsApp Admin"</b> di kolom kiri dengan menyertakan bukti transfer dan UID akun Anda agar kami cek manual.',
+'topup_time': 'Sistem pembayaran di TriHub sudah terintegrasi otomatis. Sebagian besar transaksi menggunakan QRIS, E-Wallet (DANA/GoPay/OVO), maupun Virtual Account akan sukses diproses otomatis dalam hitungan 10 detik hingga maksimal 3 menit saja.',
+'joki_time': 'Waktu pengerjaan joki sangat bergantung pada paket yang Anda ambil (Express/Fast/Basic) dan antrean joki game tersebut. Biasanya memakan waktu berkisar antara 1 hingga 24 jam. Tim pro-player kami akan segera login dan memperbarui status akun Anda secara berkala via kontak WhatsApp Anda.',
+'safety': 'Sangat aman! TriHub menjamin 100% legalitas semua produk digital kami. Untuk layanan joki, privasi akun serta password Anda dilindungi dengan enkripsi tinggi dan hanya diakses oleh joki profesional tanpa menggunakan cheat/aplikasi pihak ketiga apapun.',
+'voucher_delay': 'Kode voucher game biasanya terkirim secara otomatis melalui invoice WhatsApp dan Email yang Anda masukkan saat checkout. Silakan periksa folder Spam/Promosi di email Anda. Jika masih tidak ditemukan, admin kami siap mengirimkan ulang kode voucher secara manual via WhatsApp.'
+};
+
+const chatContainer = document.getElementById('chatContainer');
+const typingIndicator = document.getElementById('typingIndicator');
+
+function sendReply(userText, responseKey) {
+// 1. Tambahkan bubble chat dari User
+const userBubble = document.createElement('div');
+userBubble.className = 'message msg-user';
+userBubble.innerText = userText;
+chatContainer.insertBefore(userBubble, typingIndicator);
+
+// Scroll otomatis ke bawah
+chatContainer.scrollTop = chatContainer.scrollHeight;
+
+// Disable sementara semua tombol agar efek mengetik selesai terlebih dahulu
+const buttons = document.querySelectorAll('.btn-template');
+buttons.forEach(btn => btn.style.pointerEvents = 'none');
+
+// 2. Munculkan animasi mengetik (typing...)
+typingIndicator.style.display = 'block';
+chatContainer.scrollTop = chatContainer.scrollHeight;
+
+// 3. Berikan delay fiktif seolah-olah admin sedang membalas (1.5 detik)
+setTimeout(() => {
+typingIndicator.style.display = 'none';
+
+// Tambahkan bubble chat balasan dari Bot
+const botBubble = document.createElement('div');
+botBubble.className = 'message msg-bot';
+botBubble.innerHTML = responses[responseKey];
+chatContainer.insertBefore(botBubble, typingIndicator);
+
+// Mengaktifkan kembali tombol pilihan pertanyaan
+buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+
+// Scroll akhir
+chatContainer.scrollTop = chatContainer.scrollHeight;
+}, 1200);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Game - TriHub.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-base: #0c0d10; 
+            --bg-surface: #14151a;
+            --bg-card: #1c1d24;
+            --border-color: #2a2c35;
+            --text-primary: #f1f1f1;
+            --text-secondary: #8b92a5;
+            --accent: #ffcc00; 
+            --accent-hover: #e6b800;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; text-decoration: none; }
+        body { background-color: var(--bg-base); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(12, 13, 16, 0.9); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color); padding: 10px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        
+        .logo-wrapper { display: flex; align-items: center; gap: 16px; }
+        .brand-logo { height: 85px; width: auto; object-fit: contain; } 
+        .logo { font-size: 28px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: var(--text-secondary); font-size: 14px; font-weight: 600; transition: color 0.2s ease; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .btn-cs { background: var(--accent); color: #0c0d10; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 700; transition: background 0.2s ease; }
+        .btn-cs:hover { background: var(--accent-hover); }
+
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 5%; display: flex; gap: 30px; align-items: flex-start; }
+
+        .left-col { flex: 1; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; position: sticky; top: 100px; }
+        .game-banner { width: 100%; height: 200px; object-fit: cover; }
+        .game-info { padding: 24px; }
+        .game-info h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        .game-info p { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
+        .instructions h3 { font-size: 16px; margin-bottom: 10px; color: var(--text-primary); }
+        .instructions ol { padding-left: 20px; font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+
+        .right-col { flex: 2; display: flex; flex-direction: column; gap: 20px; }
+        .form-section { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
+        .section-num { display: inline-block; background: var(--accent); color: #0c0d10; width: 28px; height: 28px; text-align: center; line-height: 28px; border-radius: 50%; font-weight: 800; margin-right: 10px; font-size: 14px; }
+        .form-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; }
+
+        .input-group { display: flex; gap: 15px; margin-bottom: 15px; }
+        .input-box { flex: 1; }
+        .input-box label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; font-weight: 600; }
+        .input-box input, .input-box select { width: 100%; padding: 12px 15px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-primary); font-size: 14px; outline: none; transition: 0.2s; }
+        .input-box input:focus, .input-box select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.15); }
+
+        .grid-select { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .grid-select label { cursor: pointer; }
+        .grid-select input[type="radio"] { display: none; }
+        
+        .item-box { background: var(--bg-card); border: 2px solid var(--border-color); border-radius: 8px; padding: 16px; text-align: center; transition: all 0.2s ease; }
+        .item-box h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+        .item-box p { font-size: 13px; color: var(--text-secondary); }
+        .grid-select input[type="radio"]:checked + .item-box { border-color: var(--accent); background: rgba(255, 204, 0, 0.08); }
+
+        .payment-category { font-size: 14px; color: var(--text-secondary); margin: 24px 0 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .payment-category:first-of-type { margin-top: 0; }
+        
+        .grid-payment { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+        .grid-payment label { cursor: pointer; }
+        .grid-payment input[type="radio"] { display: none; }
+        
+        .payment-box { display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); border: 2px solid var(--border-color); border-radius: 8px; padding: 12px 16px; transition: all 0.2s ease; }
+        .payment-info { display: flex; align-items: center; gap: 12px; }
+        .payment-logo { height: 24px; max-width: 60px; object-fit: contain; }
+        .payment-name { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+        .grid-payment input[type="radio"]:checked + .payment-box { border-color: var(--accent); background: rgba(255, 204, 0, 0.08); }
+
+        .btn-submit { width: 100%; background: var(--accent); color: #0c0d10; padding: 16px; border: none; border-radius: 8px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        .btn-submit:hover { background: var(--accent-hover); }
+
+        @media screen and (max-width: 768px) {
+            .container { flex-direction: column; }
+            .left-col { position: static; }
+            .brand-logo { height: 50px; }
+            .logo { font-size: 22px; }
+            .input-group { flex-direction: column; }
+            .grid-select { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .grid-payment { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-wrapper">
+            <img src="images/logo-trihub.png" alt="TriHub Logo" class="brand-logo" onerror="this.style.display='none'">
+            <div class="logo">TriHub<span>.</span></div>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="index.html#games">Games</a>
+            <a href="index.html#joki">Joki</a>
+        </nav>
+        <a href="cs_template.html" class="btn-cs">Customer Service</a>
+    </header>
+
+    <div class="container">
+        <div class="left-col">
+            <img src="" alt="Banner" class="game-banner" id="game-banner">
+            <div class="game-info">
+                <h1 id="game-nama">Memuat...</h1>
+                <p id="game-deskripsi"></p>
+                <div class="instructions">
+                    <h3>Cara Top Up:</h3>
+                    <ol>
+                        <li>Masukkan <b>ID Akun</b> dan pilih <b>Server/Region</b>.</li>
+                        <li>Pilih nominal top up yang diinginkan.</li>
+                        <li>Pilih metode pembayaran yang tersedia.</li>
+                        <li>Masukkan nomor WhatsApp untuk bukti struk.</li>
+                        <li>Klik "Beli Sekarang" dan selesaikan pembayaran.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <form class="right-col" action="#" method="POST">
+            <div class="form-section">
+                <h2><span class="section-num">1</span> Masukkan Data Akun</h2>
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="uid">Masukkan UID / Player ID</label>
+                        <input type="text" id="uid" name="uid" placeholder="Contoh: 800123456 / Nama#Tag" required>
+                    </div>
+                    <div class="input-box">
+                        <label for="server">Pilih Server / Region</label>
+                        <select id="server" name="server" required>
+                            <option value="" disabled selected>Pilih Server...</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="section-num">2</span> Pilih Nominal</h2>
+                <div class="grid-select" id="nominal-container">
+                    </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="section-num">3</span> Pilih Pembayaran</h2>
+                
+                <div class="payment-category">E-Wallet & Scan QRIS</div>
+                <div class="grid-payment">
+                    <label>
+                        <input type="radio" name="payment" value="qris" required>
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-qris.png" alt="QRIS" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">QRIS (Semua E-Wallet)</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="dana">
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-dana.png" alt="DANA" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">DANA</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="gopay">
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-gopay.png" alt="GoPay" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">GoPay</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="ovo">
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-ovo.png" alt="OVO" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">OVO</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="payment-category">Transfer Bank (Virtual Account)</div>
+                <div class="grid-payment">
+                    <label>
+                        <input type="radio" name="payment" value="bca">
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-bca.png" alt="BCA" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">BCA Virtual Account</span>
+                            </div>
+                        </div>
+                    </label>
+                    <label>
+                        <input type="radio" name="payment" value="mandiri">
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-mandiri.png" alt="Mandiri" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">Mandiri VA</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="payment-category">Kartu Debit / Kredit</div>
+                <div class="grid-payment">
+                    <label>
+                        <input type="radio" name="payment" value="visa">
+                        <div class="payment-box">
+                            <div class="payment-info">
+                                <img src="images/pay-visa.png" alt="Visa" class="payment-logo" onerror="this.style.display='none'">
+                                <span class="payment-name">Visa / Mastercard</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2><span class="section-num">4</span> Kontak & Beli</h2>
+                <div class="input-box" style="margin-bottom: 20px;">
+                    <label for="whatsapp">Nomor WhatsApp (Opsional)</label>
+                    <input type="number" id="whatsapp" name="whatsapp" placeholder="081234567890 (Untuk pengiriman bukti / invoice)">
+                </div>
+                <button type="submit" class="btn-submit">Beli Sekarang</button>
+            </div>
+        </form>
+    </div>
+
+    <footer style="text-align: center; padding: 30px; border-top: 1px solid var(--border-color); color: var(--text-secondary); margin-top: 40px;">
+        &copy; 2026 TriHub. All rights reserved.
+    </footer>
+
+    <script>
+        const daftar_game = {
+            'hsr': {
+                'nama': 'Honkai: Star Rail',
+                'deskripsi': 'Top Up Oneiric Shard & Express Supply Pass. Proses otomatis hanya butuh UID.',
+                'banner': 'images/slide-hsr.jpg',
+                'servers': ['Asia', 'America', 'Europe', 'TW, HK, MO'],
+                'items': [
+                    {'nama': 'Express Supply Pass', 'harga': 'Rp 79.000'},
+                    {'nama': '60 Oneiric Shard', 'harga': 'Rp 16.000'},
+                    {'nama': '330 Oneiric Shard', 'harga': 'Rp 79.000'},
+                    {'nama': '1090 Oneiric Shard', 'harga': 'Rp 242.000'},
+                    {'nama': '2240 Oneiric Shard', 'harga': 'Rp 479.000'},
+                    {'nama': '8080 Oneiric Shard', 'harga': 'Rp 1.599.000'}
+                ]
+            },
+            'zzz': {
+                'nama': 'Zenless Zone Zero',
+                'deskripsi': 'Top Up Monochrome & Inter-Knot Membership. Beli dengan instan dan resmi.',
+                'banner': 'images/slide-zzz.jpg',
+                'servers': ['Asia', 'America', 'Europe', 'TW, HK, MO'],
+                'items': [
+                    {'nama': 'Inter-Knot Membership', 'harga': 'Rp 79.000'},
+                    {'nama': '60 Monochrome', 'harga': 'Rp 16.000'},
+                    {'nama': '300 Monochrome', 'harga': 'Rp 79.000'},
+                    {'nama': '980 Monochrome', 'harga': 'Rp 242.000'},
+                    {'nama': '1980 Monochrome', 'harga': 'Rp 479.000'},
+                    {'nama': '3280 Monochrome', 'harga': 'Rp 799.000'}
+                ]
+            },
+            'wuwa': {
+                'nama': 'Wuthering Waves',
+                'deskripsi': 'Top Up Lunite & Lunite Subscription. Pengiriman cepat dan 100% aman.',
+                'banner': 'images/slide-wuwa.jpg',
+                'servers': ['SEA', 'Asia', 'America', 'Europe', 'HMT'],
+                'items': [
+                    {'nama': 'Lunite Subscription', 'harga': 'Rp 79.000'},
+                    {'nama': '60 Lunite', 'harga': 'Rp 16.000'},
+                    {'nama': '300 Lunite', 'harga': 'Rp 79.000'},
+                    {'nama': '980 Lunite', 'harga': 'Rp 242.000'},
+                    {'nama': '1980 Lunite', 'harga': 'Rp 479.000'},
+                    {'nama': '3280 Lunite', 'harga': 'Rp 799.000'}
+                ]
+            },
+            'mlbb': {
+                'nama': 'Mobile Legends',
+                'deskripsi': 'Top Up Diamonds & Twilight Pass instan. Masukkan User ID dan Zone ID kamu digabung.',
+                'banner': 'images/slide-mlbb.jpg',
+                'servers': ['Global Server (Otomatis)'],
+                'items': [
+                    {'nama': 'Weekly Diamond Pass', 'harga': 'Rp 27.000'},
+                    {'nama': '86 Diamonds', 'harga': 'Rp 24.000'},
+                    {'nama': '172 Diamonds', 'harga': 'Rp 48.000'},
+                    {'nama': '257 Diamonds', 'harga': 'Rp 72.000'},
+                    {'nama': '706 Diamonds', 'harga': 'Rp 195.000'},
+                    {'nama': 'Twilight Pass', 'harga': 'Rp 149.000'}
+                ]
+            },
+            'valo': {
+                'nama': 'Valorant',
+                'deskripsi': 'Top Up Valorant Points (VP). Masukkan Riot ID kamu dengan benar.',
+                'banner': 'images/slide-valo.jpg',
+                'servers': ['Asia Pacific (AP)', 'North America (NA)', 'Europe (EU)'],
+                'items': [
+                    {'nama': '125 VP', 'harga': 'Rp 15.000'},
+                    {'nama': '420 VP', 'harga': 'Rp 50.000'},
+                    {'nama': '700 VP', 'harga': 'Rp 80.000'},
+                    {'nama': '1375 VP', 'harga': 'Rp 150.000'},
+                    {'nama': '2400 VP', 'harga': 'Rp 250.000'},
+                    {'nama': '4000 VP', 'harga': 'Rp 400.000'}
+                ]
+            }
+        };
+
+        // Ambil ID dari URL (?game=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        let gameId = urlParams.get('game');
+        
+        // Validasi, kalau ID game salah atau kosong, kembalikan ke HSR
+        if (!gameId || !daftar_game[gameId]) {
+            gameId = 'hsr';
+        }
+
+        const game = daftar_game[gameId];
+
+        // 1. Update Title, Info & Banner
+        document.title = `Top Up ${game.nama} - TriHub.`;
+        document.getElementById('game-banner').src = game.banner;
+        document.getElementById('game-nama').innerText = game.nama;
+        document.getElementById('game-deskripsi').innerText = game.deskripsi;
+
+        // 2. Render Pilihan Server Dinamis
+        const serverSelect = document.getElementById('server');
+        game.servers.forEach(srv => {
+            let option = document.createElement('option');
+            // Bikin value jadi huruf kecil & spasi diganti underscore (seperti bawaan PHP aslimu)
+            option.value = srv.toLowerCase().replace(/ /g, '_');
+            option.innerText = srv;
+            serverSelect.appendChild(option);
+        });
+
+        // 3. Render Pilihan Nominal Item Dinamis menggunakan layout HTML & CSS aslimu
+        const nominalContainer = document.getElementById('nominal-container');
+        game.items.forEach((item, index) => {
+            nominalContainer.innerHTML += `
+                <label>
+                    <input type="radio" name="nominal" value="item_${index}" required>
+                    <div class="item-box">
+                        <h4>${item.nama}</h4>
+                        <p>${item.harga}</p>
+                    </div>
+                </label>
+            `;
+        });
+    </script>
+</body>
+</html>
