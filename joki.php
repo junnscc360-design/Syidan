@@ -1,0 +1,1298 @@
+<?php
+
+$joki_games = [
+
+'hsr' => [
+'nama' => 'Honkai: Star Rail',
+'banner' => 'images/slide-hsr.jpg',
+'deskripsi' =>
+'Jasa joki Honkai: Star Rail profesional untuk farming relic, story, Simulated Universe, Memory of Chaos, dan build karakter.',
+
+'choice' => [
+'Story Quest',
+'Daily Farming',
+'Relic Farming',
+'Material Farming',
+'Build Character',
+'Simulated Universe',
+'Divergent Universe',
+'Memory of Chaos',
+'Pure Fiction'
+],
+
+'layanan' => [
+['nama'=>'Basic Service','harga'=>'Rp 25.000'],
+['nama'=>'Fast Process','harga'=>'Rp 55.000'],
+['nama'=>'Express Priority','harga'=>'Rp 90.000']
+]
+],
+
+'zzz' => [
+'nama'=>'Zenless Zone Zero',
+'banner'=>'images/slide-zzz.jpg',
+'deskripsi'=>
+'Jasa joki Zenless Zone Zero terpercaya untuk story progress, Hollow Zero, farming material, dan character build.',
+
+'choice'=>[
+'Story Progress',
+'Daily Quest',
+'Hollow Zero',
+'Routine Cleanup',
+'Material Farming',
+'Character Build',
+'Inter-Knot Leveling'
+],
+
+'layanan'=>[
+['nama'=>'Basic Service','harga'=>'Rp 30.000'],
+['nama'=>'Fast Process','harga'=>'Rp 60.000'],
+['nama'=>'Express Priority','harga'=>'Rp 95.000']
+]
+],
+
+'wuwa' => [
+'nama'=>'Wuthering Waves',
+'banner'=>'images/slide-wuwa.jpg',
+'deskripsi'=>
+'Jasa joki Wuthering Waves aman dan cepat untuk exploration, echo farming, story, dan leveling.',
+
+'choice'=>[
+'Story Quest',
+'Echo Farming',
+'Boss Farming',
+'Exploration',
+'Union EXP',
+'Character Build',
+'Daily Mission'
+],
+
+'layanan'=>[
+['nama'=>'Basic Service','harga'=>'Rp 35.000'],
+['nama'=>'Fast Process','harga'=>'Rp 65.000'],
+['nama'=>'Express Priority','harga'=>'Rp 100.000']
+]
+],
+
+'mlbb' => [
+'nama'=>'Mobile Legends',
+'banner'=>'images/slide-mlbb.jpg',
+'deskripsi'=>
+'Jasa joki Mobile Legends terpercaya untuk rank push, MCL, winrate boost, dan hero mastery.',
+
+'choice'=>[
+'Rank Push',
+'Classic Win Rate',
+'MCL',
+'Hero Mastery',
+'Savage Montage',
+'Placement Rank'
+],
+
+'layanan'=>[
+['nama'=>'Epic → Legend','harga'=>'Rp 55.000'],
+['nama'=>'Legend → Mythic','harga'=>'Rp 125.000'],
+['nama'=>'Mythic Push','harga'=>'Rp 200.000']
+]
+],
+
+'valo' => [
+'nama'=>'Valorant',
+'banner'=>'images/slide-valo.jpg',
+'deskripsi'=>
+'Jasa joki Valorant profesional untuk rank push, placement match, coaching, dan battlepass grind.',
+
+'choice'=>[
+'Rank Push',
+'Placement Match',
+'Aim Coaching',
+'Battlepass Farming',
+'Unrated Grind',
+'Agent Contract'
+],
+
+'layanan'=>[
+['nama'=>'Iron → Silver','harga'=>'Rp 65.000'],
+['nama'=>'Silver → Gold','harga'=>'Rp 120.000'],
+['nama'=>'Gold → Platinum','harga'=>'Rp 180.000']
+]
+]
+
+];
+
+$current_game = 'hsr';
+
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Joki Game - TriHub.</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+:root{
+--bg-base:#0c0d10;
+--bg-surface:#14151a;
+--bg-card:#1c1d24;
+--border-color:#2a2c35;
+--text-primary:#f1f1f1;
+--text-secondary:#8b92a5;
+--accent:#ffcc00;
+--accent-hover:#e6b800;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:
+'Plus Jakarta Sans',
+sans-serif;
+text-decoration:none;
+}
+
+body{
+background:
+var(--bg-base);
+color:
+var(--text-primary);
+overflow-x:hidden;
+}
+
+header{
+position:sticky;
+top:0;
+z-index:100;
+background:
+rgba(12,13,16,.92);
+
+backdrop-filter:
+blur(8px);
+
+border-bottom:
+1px solid
+var(--border-color);
+
+padding:10px 5%;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo-wrapper{
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.brand-logo{
+height:85px;
+width:auto;
+object-fit:contain;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+color:white;
+}
+
+.logo span{
+color:var(--accent);
+}
+
+.nav-links{
+display:flex;
+gap:32px;
+}
+
+.nav-links a{
+color:
+var(--text-secondary);
+font-size:14px;
+font-weight:700;
+transition:.2s;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+.btn-cs{
+background:
+var(--accent);
+
+color:#111;
+padding:10px 22px;
+border-radius:8px;
+font-weight:800;
+}
+
+.container{
+max-width:1450px;
+margin:40px auto;
+padding:0 5%;
+
+display:flex;
+gap:28px;
+align-items:flex-start;
+}
+
+.left-col{
+flex:1.1;
+
+background:
+var(--bg-surface);
+
+border:1px solid
+var(--border-color);
+
+border-radius:16px;
+overflow:hidden;
+
+position:sticky;
+top:95px;
+}
+
+.game-banner{
+
+width:100%;
+
+/* BIAR GAK KEPOTONG */
+height:360px;
+
+object-fit:contain;
+object-position:center;
+
+background:#101114;
+padding:12px;
+
+display:block;
+}
+
+.game-info{
+padding:24px;
+}
+
+.game-info h1{
+font-size:30px;
+margin-bottom:12px;
+font-weight:800;
+}
+
+.game-info p{
+font-size:14px;
+line-height:1.9;
+color:
+var(--text-secondary);
+}
+
+.right-col{
+flex:2;
+
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+.form-section{
+
+background:
+var(--bg-surface);
+
+border:
+1px solid
+var(--border-color);
+
+border-radius:16px;
+padding:24px;
+}
+
+.section-title{
+font-size:20px;
+font-weight:800;
+margin-bottom:20px;
+}
+
+.game-grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,
+minmax(170px,1fr));
+
+gap:15px;
+}
+
+.game-card input{
+display:none;
+}
+
+.choice-box{
+background:
+var(--bg-card);
+
+border:2px solid
+var(--border-color);
+
+border-radius:14px;
+
+padding:14px;
+text-align:center;
+
+cursor:pointer;
+transition:.25s;
+}
+
+.choice-box img{
+
+width:100%;
+height:95px;
+
+border-radius:10px;
+
+/* MINI COVER GAME */
+object-fit:cover;
+object-position:center;
+
+margin-bottom:10px;
+}
+
+.choice-box:hover{
+
+border-color:
+var(--accent);
+
+box-shadow:
+0 0 12px
+rgba(255,204,0,.18),
+
+0 0 24px
+rgba(255,204,0,.08);
+
+transform:
+translateY(-3px);
+}
+```
+.game-card input:checked + .choice-box{
+
+border-color:
+var(--accent);
+
+background:
+rgba(255,204,0,.08);
+
+box-shadow:
+0 0 14px rgba(255,204,0,.18),
+0 0 26px rgba(255,204,0,.08);
+}
+
+/* ===== PILIHAN JOKI ===== */
+
+.choice-grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,
+minmax(190px,1fr));
+
+gap:15px;
+}
+
+.choice-item input{
+display:none;
+}
+
+.choice-service-box{
+
+background:
+var(--bg-card);
+
+border:2px solid
+var(--border-color);
+
+border-radius:14px;
+
+padding:18px;
+text-align:center;
+
+font-size:14px;
+font-weight:700;
+
+cursor:pointer;
+transition:.25s;
+}
+
+.choice-service-box:hover{
+
+border-color:
+var(--accent);
+
+box-shadow:
+0 0 14px rgba(255,204,0,.18),
+0 0 26px rgba(255,204,0,.08);
+
+transform:
+translateY(-3px);
+}
+
+.choice-item input:checked
++ .choice-service-box{
+
+border-color:
+var(--accent);
+
+background:
+rgba(255,204,0,.08);
+
+box-shadow:
+0 0 16px rgba(255,204,0,.20),
+0 0 30px rgba(255,204,0,.10);
+}
+
+/* ===== PAKET JOKI ===== */
+
+.layanan-grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,
+minmax(190px,1fr));
+
+gap:15px;
+}
+
+.layanan-card input{
+display:none;
+}
+
+.item-box{
+
+background:
+var(--bg-card);
+
+border:2px solid
+var(--border-color);
+
+border-radius:14px;
+
+padding:22px;
+text-align:center;
+
+cursor:pointer;
+transition:.25s;
+}
+
+.item-box:hover{
+
+border-color:
+var(--accent);
+
+box-shadow:
+0 0 14px rgba(255,204,0,.20),
+0 0 30px rgba(255,204,0,.08);
+
+transform:
+translateY(-3px);
+}
+
+.item-box h4{
+font-size:15px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.item-box p{
+font-size:20px;
+font-weight:800;
+color:var(--accent);
+}
+
+.layanan-card input:checked
++ .item-box{
+
+border-color:
+var(--accent);
+
+background:
+rgba(255,204,0,.08);
+
+box-shadow:
+0 0 16px rgba(255,204,0,.20),
+0 0 32px rgba(255,204,0,.12);
+}
+
+/* ===== INPUT ===== */
+
+.input-box{
+margin-bottom:18px;
+}
+
+.input-box label{
+display:block;
+margin-bottom:8px;
+font-size:14px;
+font-weight:700;
+color:var(--text-secondary);
+}
+
+.input-box input,
+.input-box textarea{
+
+width:100%;
+padding:15px;
+
+background:
+var(--bg-card);
+
+border:1px solid
+var(--border-color);
+
+border-radius:10px;
+color:white;
+
+outline:none;
+font-size:14px;
+}
+
+.input-box textarea{
+resize:none;
+}
+
+.input-box input:focus,
+.input-box textarea:focus{
+
+border-color:
+var(--accent);
+
+box-shadow:
+0 0 0 3px
+rgba(255,204,0,.12);
+}
+
+/* ===== PAYMENT ===== */
+
+.payment-grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,
+minmax(220px,1fr));
+
+gap:14px;
+}
+
+.payment-card input{
+display:none;
+}
+
+.payment-box{
+
+display:flex;
+align-items:center;
+gap:14px;
+
+padding:16px;
+
+background:
+var(--bg-card);
+
+border:2px solid
+var(--border-color);
+
+border-radius:14px;
+
+cursor:pointer;
+transition:.25s;
+}
+
+.payment-box:hover{
+
+border-color:
+var(--accent);
+
+box-shadow:
+0 0 12px rgba(255,204,0,.14),
+0 0 24px rgba(255,204,0,.08);
+}
+
+.payment-box img{
+height:26px;
+object-fit:contain;
+}
+
+.payment-card input:checked
++ .payment-box{
+
+border-color:
+var(--accent);
+
+background:
+rgba(255,204,0,.08);
+}
+
+/* ===== BUTTON ===== */
+
+.btn-submit{
+
+width:100%;
+border:none;
+
+padding:18px;
+
+background:
+var(--accent);
+
+color:#111;
+font-size:16px;
+font-weight:800;
+
+border-radius:12px;
+cursor:pointer;
+transition:.25s;
+
+margin-top:10px;
+}
+
+.btn-submit:hover{
+background:
+var(--accent-hover);
+
+transform:
+translateY(-2px);
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+.container{
+flex-direction:column;
+}
+
+.left-col{
+position:static;
+}
+
+.game-banner{
+height:250px;
+}
+
+.brand-logo{
+height:55px;
+}
+
+.nav-links{
+display:none;
+}
+
+.game-grid,
+.choice-grid,
+.layanan-grid{
+grid-template-columns:
+repeat(2,1fr);
+}
+
+.payment-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="index.php"
+class="logo-wrapper">
+
+<img
+src="images/logo-trihub.png"
+class="brand-logo"
+alt="TriHub Logo">
+
+<div class="logo">
+TriHub<span>.</span>
+</div>
+
+</a>
+
+<nav class="nav-links">
+<a href="index.php">Beranda</a>
+<a href="index.php#games">Games</a>
+<a href="index.php#joki">Joki</a>
+</nav>
+
+<a href="cs_template.php"
+class="btn-cs">
+Customer Service
+</a>
+
+</header>
+
+<div class="container">
+
+<!-- LEFT SIDE -->
+<div class="left-col">
+
+<img
+id="bannerPreview"
+src="<?php echo $joki_games[$current_game]['banner']; ?>"
+class="game-banner">
+
+<div class="game-info">
+
+<h1 id="gameTitle">
+<?php echo $joki_games[$current_game]['nama']; ?>
+</h1>
+
+<p id="gameDesc">
+<?php echo $joki_games[$current_game]['deskripsi']; ?>
+</p>
+
+</div>
+</div>
+
+<!-- RIGHT SIDE -->
+<form class="right-col">
+
+<div class="form-section">
+
+<h2 class="section-title">
+1. Pilih Game
+</h2>
+
+<div class="game-grid">
+
+<?php foreach($joki_games as $key => $game): ?>
+
+<label class="game-card">
+
+<input
+type="radio"
+name="game"
+value="<?php echo $key; ?>"
+<?php echo
+$key == 'hsr'
+? 'checked'
+: ''; ?>
+
+required>
+
+<div class="choice-box">
+
+<img
+src="<?php echo $game['banner']; ?>">
+
+<h3>
+<?php echo $game['nama']; ?>
+</h3>
+
+</div>
+
+</label>
+
+<?php endforeach; ?>
+
+</div>
+</div>
+
+<div class="form-section">
+
+<h2 class="section-title">
+2. Pilih Jenis Joki
+</h2>
+
+<div
+class="choice-grid"
+id="choiceContainer">
+
+<?php foreach(
+$joki_games['hsr']['choice']
+as $choice): ?>
+
+<label class="choice-item">
+
+<input
+type="radio"
+name="choice"
+required>
+
+<div class="choice-service-box">
+
+<?php echo $choice; ?>
+
+</div>
+
+</label>
+
+<?php endforeach; ?>
+
+</div>
+
+</div>
+
+<div class="form-section">
+
+<h2 class="section-title">
+3. Pilih Paket
+</h2>
+
+<div
+class="layanan-grid"
+id="layananContainer">
+
+<?php foreach(
+$joki_games['hsr']['layanan']
+as $layanan): ?>
+
+<label
+class="layanan-card">
+
+<input
+type="radio"
+name="layanan"
+required>
+
+<div class="item-box">
+
+<h4>
+<?php echo
+$layanan['nama']; ?>
+</h4>
+
+<p>
+<?php echo
+$layanan['harga']; ?>
+</p>
+
+</div>
+
+</label>
+
+<?php endforeach; ?>
+
+</div>
+
+</div>
+
+<!-- DATA AKUN -->
+
+<div class="form-section">
+
+<h2 class="section-title">
+4. Data Akun
+</h2>
+
+<div class="input-box">
+<label>
+UID / Username Akun
+</label>
+
+<input
+type="text"
+name="uid"
+placeholder="Masukkan UID / Username"
+required>
+</div>
+
+<div class="input-box">
+<label>
+Password Akun (Opsional)
+</label>
+
+<input
+type="text"
+name="password"
+placeholder="Kosongkan jika login via QR / kode">
+</div>
+
+<div class="input-box">
+<label>
+Request / Catatan Joki
+</label>
+
+<textarea
+rows="4"
+name="catatan"
+placeholder="Contoh: Fokus relic, push rank, farming material, build karakter, dll"></textarea>
+</div>
+
+</div>
+
+<!-- PEMBAYARAN -->
+
+<div class="form-section">
+
+<h2 class="section-title">
+5. Metode Pembayaran
+</h2>
+
+<div class="payment-grid">
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="qris"
+required>
+
+<div class="payment-box">
+
+<img
+src="images/pay-qris.png"
+alt="QRIS">
+
+<span>
+QRIS
+</span>
+
+</div>
+
+</label>
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="dana">
+
+<div class="payment-box">
+
+<img
+src="images/pay-dana.png"
+alt="DANA">
+
+<span>
+DANA
+</span>
+
+</div>
+
+</label>
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="gopay">
+
+<div class="payment-box">
+
+<img
+src="images/pay-gopay.png"
+alt="GoPay">
+
+<span>
+GoPay
+</span>
+
+</div>
+
+</label>
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="ovo">
+
+<div class="payment-box">
+
+<img
+src="images/pay-ovo.png"
+alt="OVO">
+
+<span>
+OVO
+</span>
+
+</div>
+
+</label>
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="bca">
+
+<div class="payment-box">
+
+<img
+src="images/pay-bca.png"
+alt="BCA">
+
+<span>
+BCA Virtual Account
+</span>
+
+</div>
+
+</label>
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="mandiri">
+
+<div class="payment-box">
+
+<img
+src="images/pay-mandiri.png"
+alt="Mandiri">
+
+<span>
+Mandiri VA
+</span>
+
+</div>
+
+</label>
+
+<label class="payment-card">
+
+<input
+type="radio"
+name="payment"
+value="visa">
+
+<div class="payment-box">
+
+<img
+src="images/pay-visa.png"
+alt="Visa">
+
+<span>
+Visa / Mastercard
+</span>
+
+</div>
+
+</label>
+
+</div>
+
+</div>
+
+<!-- WHATSAPP -->
+
+<div class="form-section">
+
+<h2 class="section-title">
+6. Kirim Invoice
+</h2>
+
+<div class="input-box">
+
+<label>
+Nomor WhatsApp
+</label>
+
+<input
+type="number"
+name="whatsapp"
+placeholder="08xxxxxxxxxx"
+required>
+
+</div>
+
+<label
+style="
+display:flex;
+align-items:center;
+gap:10px;
+font-size:14px;
+color:var(--text-secondary);
+cursor:pointer;
+">
+
+<input
+type="checkbox"
+checked>
+
+Kirim bukti transaksi
+ke WhatsApp
+
+</label>
+
+<button
+type="submit"
+class="btn-submit">
+
+Pesan Joki Sekarang
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<footer>
+
+© 2026 TriHub.
+All Rights Reserved.
+
+</footer>
+
+<script>
+
+const gameData =
+<?php echo json_encode($joki_games); ?>;
+
+const radios =
+document.querySelectorAll(
+'input[name="game"]'
+);
+
+const banner =
+document.getElementById(
+'bannerPreview'
+);
+
+const title =
+document.getElementById(
+'gameTitle'
+);
+
+const desc =
+document.getElementById(
+'gameDesc'
+);
+
+const choiceContainer =
+document.getElementById(
+'choiceContainer'
+);
+
+const layananContainer =
+document.getElementById(
+'layananContainer'
+);
+
+radios.forEach(radio => {
+
+radio.addEventListener(
+'change',
+
+function(){
+
+const selected =
+gameData[this.value];
+
+banner.src =
+selected.banner;
+
+title.innerText =
+selected.nama;
+
+desc.innerText =
+selected.deskripsi;
+
+/* UPDATE CHOICE */
+
+choiceContainer.innerHTML =
+'';
+
+selected.choice
+.forEach(choice => {
+
+choiceContainer.innerHTML += `
+
+<label class="choice-item">
+
+<input
+type="radio"
+name="choice"
+required>
+
+<div
+class="choice-service-box">
+
+${choice}
+
+</div>
+
+</label>
+
+`;
+
+});
+
+/* UPDATE LAYANAN */
+
+layananContainer
+.innerHTML = '';
+
+selected.layanan
+.forEach(item => {
+
+layananContainer
+.innerHTML += `
+
+<label
+class="layanan-card">
+
+<input
+type="radio"
+name="layanan"
+required>
+
+<div
+class="item-box">
+
+<h4>
+${item.nama}
+</h4>
+
+<p>
+${item.harga}
+</p>
+
+</div>
+
+</label>
+
+`;
+
+});
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
