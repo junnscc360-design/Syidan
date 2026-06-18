@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriHub. - Premium Digital Assets</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-base: #0c0d10;
+            --bg-surface: #14151a;
+            --bg-card: #1c1d24;
+            --border-color: #2a2c35;
+            --text-primary: #f1f1f1;
+            --text-secondary: #8b92a5;
+            --accent: #ffcc00;
+            --accent-hover: #e6b800;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a h3 { color: var(--text-primary) !important; }
+        a p { color: var(--text-secondary) !important; }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(12, 13, 16, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            height: 85px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-cs {
+            background: var(--accent);
+            color: #0c0d10;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+
+        .btn-cs:hover {
+            background: var(--accent-hover);
+        }
+
+        .slider-wrapper {
+            max-width: 1400px;
+            margin: 40px auto 30px auto;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .slider-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background-color: var(--bg-card);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(12,13,16,0.8), transparent);
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            z-index: 10;
+        }
+
+        .slide-caption h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .slide-caption p {
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        .hero-text {
+            text-align: center;
+            padding: 10px 5% 50px 5%;
+        }
+
+        .hero-text h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        main {
+            padding: 0 5% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin: 40px 0 24px;
+        }
+
+        .section-header span {
+            color: var(--text-secondary);
+            border-left: 2px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: .2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .card-img,
+        .logo-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .logo-img {
+            object-fit: contain;
+            background: white;
+            padding: 20px;
+        }
+
+        .card-info {
+            padding: 16px;
+        }
+
+        .joki-card {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .joki-img {
+            width: 240px;
+            min-height: 120px;
+            object-fit: contain;
+            background-color: #72c6b4;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 30px 5%;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        @media screen and (max-width:768px){
+
+            header{
+                flex-direction:column;
+                gap:15px;
+                padding:15px;
+            }
+
+            .brand-logo{
+                height:50px;
+            }
+
+            .nav-links{
+                display:none;
+            }
+
+            .slider-container{
+                height:220px;
+            }
+
+            .hero-text h1{
+                font-size:24px;
+            }
+
+            .grid-container{
+                grid-template-columns:
+                repeat(2,1fr);
+            }
+
+            .joki-card{
+                flex-direction:column;
+            }
+
+            .joki-img{
+                width:100%;
+                height:160px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo-wrapper">
+        <img src="images/logo-trihub.png" class="brand-logo">
+        <div class="logo">TriHub<span>.</span></div>
+    </a>
+
+    <nav class="nav-links">
+        <a href="#games">Games</a>
+        <a href="#joki">Joki</a>
+        <a href="#voucher">Vouchers</a>
+        <a href="#utilities">Utilities</a>
+    </nav>
+
+    <a href="cs_template.html" class="btn-cs">
+        Customer Service
+    </a>
+</header>
+
+<div class="slider-wrapper">
+    <div class="slider-container">
+
+        <div class="slide">
+            <img src="images/slide-hsr.jpg">
+            <div class="slide-caption">
+                <h2>Honkai: Star Rail</h2>
+                <p>Top Up Oneiric Shard Instant</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/slide-zzz.jpg">
+            <div class="slide-caption">
+                <h2>Zenless Zone Zero</h2>
+                <p>Monochrome & Inter-Knot</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <img src="images/slide-wuwa.jpg">
+            <div class="slide-caption">
+                <h2>Wuthering Waves</h2>
+                <p>Lunite & Subscription</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="hero-text">
+    <h1>Temukan Aset Digital Kebutuhanmu.</h1>
+
+    <div class="search-container">
+        <input type="text" id="searchInput"
+        placeholder="Cari game, layanan joki, atau voucher...">
+    </div>
+</div>
+
+<main>
+
+<div class="section-header" id="games">
+    <h2>Trending Games</h2>
+    <span>Direct Top Up</span>
+</div>
+
+<div class="grid-container">
+
+    <a href="detail.html?game=hsr" class="card item-card">
+    <img src="images/game-hsr.jpg" class="card-img">
+    <div class="card-info">
+    <h3>Honkai: Star Rail</h3>
+    <p>Oneiric Shard & Pass</p>
+    </div>
+    </a>
+
+    <a href="detail.html?game=zzz" class="card item-card">
+    <img src="images/game-zzz.jpg" class="card-img">
+    <div class="card-info">
+    <h3>Zenless Zone Zero</h3>
+    <p>Monochrome & Inter-Knot</p>
+    </div>
+    </a>
+
+    <a href="detail.html?game=wuwa" class="card item-card">
+    <img src="images/game-wuwa.jpg" class="card-img">
+    <div class="card-info">
+    <h3>Wuthering Waves</h3>
+    <p>Lunite & Subscription</p>
+    </div>
+    </a>
+
+    <a href="detail.html?game=mlbb" class="card item-card">
+    <img src="images/game-mlbb.jpg" class="card-img">
+    <div class="card-info">
+    <h3>Mobile Legends</h3>
+    <p>Diamonds & Pass</p>
+    </div>
+    </a>
+
+    <a href="detail.html?game=valo" class="card item-card">
+    <img src="images/game-valo.jpg" class="card-img">
+    <div class="card-info">
+    <h3>Valorant</h3>
+    <p>Valorant Points (VP)</p>
+    </div>
+    </a>
+
+</div>
+
+<div class="section-header" id="joki">
+    <h2>Layanan Joki</h2>
+    <span>Pro & Secure</span>
+</div>
+
+<div class="grid-container">
+
+    <a href="joki.html" class="card item-card joki-card">
+    <img src="images/joki-all.jpg" class="joki-img">
+
+    <div class="card-info">
+    <h3>Joki Eksklusif TriHub</h3>
+    <p>Bantuan profesional untuk Farming & Story.</p>
+    </div>
+    </a>
+
+</div>
+
+<div class="section-header" id="voucher">
+    <h2>Digital Vouchers</h2>
+    <span>Steam, PSN, Xbox, Nintendo & Discord</span>
+</div>
+
+<div class="grid-container">
+
+    <a href="evoucher.html?voucher=steam" class="card item-card">
+    <img src="images/wallet-steam.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Steam Wallet</h3>
+    <p>IDR & Global</p>
+    </div>
+    </a>
+
+    <a href="evoucher.html?voucher=discord" class="card item-card">
+    <img src="images/wallet-discord.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Discord Nitro</h3>
+    <p>Basic & Premium</p>
+    </div>
+    </a>
+
+    <a href="evoucher.html?voucher=psn" class="card item-card">
+    <img src="images/wallet-psn.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>PSN Card</h3>
+    <p>Wallet & PS Plus</p>
+    </div>
+    </a>
+
+    <a href="evoucher.html?voucher=xbox" class="card item-card">
+    <img src="images/wallet-xbox.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Xbox Gift Card</h3>
+    <p>Game Pass & Credit</p>
+    </div>
+    </a>
+
+    <a href="evoucher.html?voucher=nintendo" class="card item-card">
+    <img src="images/wallet-nintendo.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Nintendo eShop</h3>
+    <p>Region US & Japan</p>
+    </div>
+    </a>
+
+</div>
+
+<!-- AREA TAMBAHAN: UTILITIES & TAGIHAN -->
+<div class="section-header" id="utilities">
+    <h2>Utilities & Tagihan</h2>
+    <span>Token Listrik, Pulsa & Paket Data</span>
+</div>
+
+<div class="grid-container">
+
+    <!-- Tambahan ?service=pln agar langsung membuka menu PLN -->
+    <a href="tagihan.html?service=pln" class="card item-card">
+    <img src="images/wallet-pln.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Token Listrik PLN</h3>
+    <p>Prabayar & Pascabayar</p>
+    </div>
+    </a>
+
+    <!-- Tambahan ?service=pulsa agar langsung membuka menu Pulsa -->
+    <a href="tagihan.html?service=pulsa" class="card item-card">
+    <img src="images/wallet-pulsa.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Pulsa & Data</h3>
+    <p>All Operator Indonesia</p>
+    </div>
+    </a>
+
+    <a href="ewallet.html" class="card item-card">
+    <img src="images/wallet-ewallet.jpg" class="logo-img">
+    <div class="card-info">
+    <h3>Top Up E-Wallet</h3>
+    <p>GoPay, DANA, OVO, ShopeePay</p>
+    </div>
+    </a>
+
+</div>
+<!-- AKHIR AREA TAMBAHAN -->
+
+</main>
+
+<footer>
+&copy; 2026 TriHub. All rights reserved.
+</footer>
+
+<script>
+let slideIndex = 0;
+
+function showSlides() {
+
+    let slides =
+    document.getElementsByClassName("slide");
+
+    for(let i=0;i<slides.length;i++){
+        slides[i].style.display="none";
+    }
+
+    slideIndex++;
+
+    if(slideIndex > slides.length){
+        slideIndex = 1;
+    }
+
+    slides[slideIndex-1].style.display="block";
+
+    setTimeout(showSlides,4000);
+}
+
+showSlides();
+
+document.getElementById('searchInput')
+.addEventListener('input', function(){
+
+const val =
+this.value.toLowerCase();
+
+document.querySelectorAll('.item-card')
+.forEach(card => {
+
+card.style.display =
+card.innerText
+.toLowerCase()
+.includes(val)
+? ''
+: 'none';
+
+});
+});
+</script>
+
+</body>
+</html>
